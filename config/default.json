@@ -1,0 +1,17 @@
+{
+    "chatGpt": {
+        "secret": "Chat GPT Secret Key Goes Here",
+        "dialoguePrompt": "Generate a comedy conversation between Spongebob, Patrick, and Squidward no longer than 1 minute. It needs to be formatted as Name: \"Dialogue Here\". The topic is: <topic>"
+    },
+    "uberDuck": {
+        "key": "Uberduck API Public Key Goes Here",
+        "secret": "Uberduck API Secret Key Goes Here",
+        "speak": "https://api.uberduck.ai/speak",
+        "speak_status": "https://api.uberduck.ai/speak-status"
+    },
+    "mongoDb": {
+        "connectionString": "mongodb+srv://<username>:<password>@xxx.xxx.mongodb.net/   Replace with your own mongoDB connection string",
+        "username": "Replace with your mongoDB username",
+        "password": "Replace with your mongoDB password"
+    }
+}
