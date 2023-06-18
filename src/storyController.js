@@ -5,6 +5,8 @@ const uri = config.mongoDb.connectionString.replace('<password>', config.mongoDb
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(uri);
 
+const { v4: uuidv4 } = require('uuid');
+
 var generating = false;
 
 var suggestTopic = async (req, res) => {
@@ -97,6 +99,7 @@ var generateStory = async () => {
             
             for (var i = 0; i < messages.length; i++) {
                 uid_array.push(await requestVoice(messages[i]));
+                await wait(5000);
             }
             
             var generatedSpeech = await pollSpeech(uid_array);
@@ -108,7 +111,7 @@ var generateStory = async () => {
                 scenarios.push({
                     character: messages[i].character,
                     text: messages[i].dialogue,
-                    sound: generatedSpeech[i].path
+                    sound: config.fakeYou.storage_base_path + generatedSpeech[i].state.maybe_public_bucket_wav_audio_path
                 });
             }
 
@@ -167,7 +170,7 @@ var pollSpeech = async (uid_array) => {
         polledSpeeches.push(await speakStatus(uid_array[i]));
     }
 
-    if (polledSpeeches.filter(speech => speech.finished_at == null).length != 0) {
+    if (polledSpeeches.filter(speech => speech.state.status == "pending").length != 0) {
         //Recursively call the poll function
         pollSpeech(uid_array);
     }
@@ -181,35 +184,37 @@ function wait(milliseconds) {
 }
 
 var requestVoice = async (dialogue) => {
-    
+    console.log("Requesting Voice Line");
+    const uid = uuidv4();
+
     var request = {
         method: "POST",
         headers: {
             "Content-Type":"application/json",
-            "Authorization": "Basic " + Buffer.from(config.uberDuck.key + ":" + config.uberDuck.secret).toString('base64')
+            "Cookie": "session=" + config.fakeYou.jwt
         },
         body: JSON.stringify({
-            speech: dialogue.dialogue,
-            voice: dialogue.character == "Spongebob" ? "spongebob" : dialogue.character == "Patrick" ? 'patrick' : 'squidward'
+            inference_text: dialogue.dialogue,
+            tts_model_token: dialogue.character == "Spongebob" ? config.fakeYou.spongebob : dialogue.character == "Patrick" ? config.fakeYou.patrick : config.fakeYou.squidward,
+            uuid_idempotency_token: uid
         })
     };
 
-    var response = await fetch(config.uberDuck.speak, request);
+    var response = await fetch(config.fakeYou.speak, request);
     var jsonResponse = await response.json();
 
-    return jsonResponse.uuid;
+    return jsonResponse.inference_job_token;
 }
 
 var speakStatus = async (uid) => {
     var request = {
         method: "GET",
         headers: {
-            "Content-Type":"application/json",
-            "Authorization": "Basic " + Buffer.from(config.uberDuck.key + ":" + config.uberDuck.secret).toString('base64')
+            "Content-Type":"application/json"
         }
     };
 
-    var response = await fetch(config.uberDuck.speak_status + "?uuid=" + uid, request);
+    var response = await fetch(config.fakeYou.speak_status + "/" + uid, request);
     var jsonResponse = await response.json();
 
     return jsonResponse;
