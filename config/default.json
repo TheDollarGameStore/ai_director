@@ -1,7 +1,8 @@
 {
     "chatGpt": {
         "secret": "Chat GPT Secret Key Goes Here",
-        "dialoguePrompt": "Generate a comedy conversation between Spongebob, Patrick, and Squidward no longer than 1 minute. It needs to be formatted as Name: \"Dialogue Here\". The topic is: <topic>"
+        "dialoguePrompt": "Generate a comedy conversation between Spongebob, Patrick, and Squidward no longer than 1 minute. It needs to be formatted as Name: \"Dialogue Here\". The topic is: <topic>",
+        "topicPrompt": "Generate a random one sentence sitcom topic"
     },
     "fakeYou": {
         "speak": "https://api.fakeyou.com/tts/inference",
