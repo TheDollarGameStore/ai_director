@@ -60,6 +60,8 @@ var generateStory = async () => {
         }
 
         //Check if there are any proposed topics
+        
+        /*
         var count = await client.db("Director").collection("proposed_topics").countDocuments();
 
         if (count == 0) {
@@ -68,6 +70,7 @@ var generateStory = async () => {
             await autoGenerateTopic();
             return;
         }
+        */
 
         //Retrieve all
         var results = await client.db("Director").collection("proposed_topics").find().toArray();
@@ -235,12 +238,12 @@ var requestVoice = async (dialogue) => {
 
 var getModelId = (character) => {
 
-    switch (character) {
-        case "Spongebob":
+    switch (character.toLowerCase()) {
+        case "spongebob":
             return config.fakeYou.spongebob
-        case "Patrick":
+        case "patrick":
             return config.fakeYou.patrick
-        case "Squidward":
+        case "squidward":
             return config.fakeYou.squidward
         default:
             return config.fakeYou.spongebob;
