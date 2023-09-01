@@ -1,13 +1,17 @@
 {
     "chatGpt": {
         "secret": "Chat GPT Secret Key Goes Here",
-        "dialoguePrompt": "Generate a comedy conversation between Spongebob, Patrick, and Squidward no longer than 1 minute. It needs to be formatted as Name: \"Dialogue Here\". The topic is: <topic>"
+        "dialoguePrompt": "Generate a comedy conversation between Spongebob, Patrick, and Squidward no longer than 1 minute. It needs to be formatted as Name: \"Dialogue Here\". The topic is: <topic>",
+        "topicPrompt": "Generate a random one sentence sitcom topic"
     },
-    "uberDuck": {
-        "key": "Uberduck API Public Key Goes Here",
-        "secret": "Uberduck API Secret Key Goes Here",
-        "speak": "https://api.uberduck.ai/speak",
-        "speak_status": "https://api.uberduck.ai/speak-status"
+    "fakeYou": {
+        "speak": "https://api.fakeyou.com/tts/inference",
+        "speak_status": "https://api.fakeyou.com/tts/job",
+        "storage_base_path": "https://storage.googleapis.com/vocodes-public",
+        "spongebob": "TM:618j8qwddnsn",
+        "patrick": "TM:ptcaavcfhwxd",
+        "squidward": "TM:4e2xqpwqaggr",
+        "jwt": "The JWT token you get from the session cookie. Log in to the website, head over to your browser dev tools, and grab the token from the session cookie. The value you paste here should be decodable by https://jwt.io/"
     },
     "mongoDb": {
         "connectionString": "mongodb+srv://<username>:<password>@xxx.xxx.mongodb.net/   Replace with your own mongoDB connection string",
