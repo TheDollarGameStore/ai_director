@@ -1,4 +1,7 @@
 # ai_director
+
+# NOTE THAT UBERDUCK IS NO LONGER SUPPORTED. THE MAIN BRANCH IS NOW FOR FAKE-YOU. MORE INSTRUCTIONS ON SETTING UP FAKE-YOU IN THE DISCORD!
+
 The project containing all the logic for the AI show orchestrator
 
 Setup Tutorial:

@@ -59,7 +59,7 @@ var generateStory = async () => {
             return;
         }
 
-        //Check if there are any proposed topics
+        //If you want an endless Livestream that generates even when no topics are available, uncomment the below!
         
         /*
         var count = await client.db("Director").collection("proposed_topics").countDocuments();
